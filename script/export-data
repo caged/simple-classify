@@ -1,0 +1,30 @@
+#!/bin/bash
+
+dbname=nba
+season=${1-"'2015-16','2014-15'"}
+echo $season
+
+psql -c "copy(
+select
+  psb.season,
+  player,
+  split_part(position, '-', 1) as pos,
+  psb.w_pct,
+  psb.ast,
+  psb.reb,
+  psb.blk,
+  psb.stl,
+  psb.fg3a,
+  psb.fg3_pct,
+  psb.ftm,
+  psb.fta,
+  psb.oreb,
+  psb.dreb,
+  psb.reb
+from player_stats_base psb
+inner join playertracking pt on pt.player_id = psb.player_id
+where
+  psb.permode = 'per36'
+  and psb.min >= 500
+  and psb.season in ($season) order by season
+) to stdout csv header" $dbname
