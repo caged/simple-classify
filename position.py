@@ -40,15 +40,3 @@ with open('data/players.csv', newline='') as f:
         f = round(pred[1], 2)
         c = round(pred[2], 2)
         print("%s (%s) %s was %s G, %s F, %s C" % (meta[0], positions[int(meta[2])], meta[1], g, f, c))
-
-# # 2010-11 per36 season data
-# howard = [2,1.3,13.5,2.3,1.3]
-# bryant = [1,5,5.4,0.2,1.3]
-# westbrook = [0,8.5,4.8,0.4,2]
-# players = [howard, bryant, westbrook]
-#
-# # Predict player positions (G, F, C)
-# pred = model.predict(players)
-# print("Bryan position prediction:", pred[0])
-# print("Howard position prediction:", pred[1])
-# print("Westbrook position prediction:", pred[2])
