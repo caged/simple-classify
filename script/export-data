@@ -8,7 +8,7 @@ psql -c "copy(
 select
   psb.season,
   player,
-  split_part(position, '-', 1) as pos,
+  array_position(array['G', 'F', 'C'], split_part(position, '-', 1)) as pos,
   psb.w_pct,
   psb.ast,
   psb.reb,
