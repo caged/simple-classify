@@ -32,11 +32,13 @@ model.fit(data, labels, n_epoch=10, batch_size=10, show_metric=True)
 with open('data/players.csv', newline='') as f:
     next(f) # Skip header row
     test_data = csv.reader(f)
-    for row in test_data:
-        meta = row[:3]
-        stats = row[3:]
-        pred = model.predict([stats])[0]
-        g = round(pred[0], 2)
-        f = round(pred[1], 2)
-        c = round(pred[2], 2)
-        print("%s (%s) %s was %s G, %s F, %s C" % (meta[0], positions[int(meta[2])], meta[1], g, f, c))
+
+    with open('data/results.csv', 'w', newline='') as r:
+        outfile = csv.writer(r)
+        outfile.writerow(['season', 'name', 'position'] + positions)
+        for row in test_data:
+            meta = row[:3]
+            stats = row[3:]
+            meta[2] = positions[int(meta[2])]
+            pred = model.predict([stats])[0]
+            outfile.writerow(meta + pred)
