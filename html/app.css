@@ -1,0 +1,17 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #f7f7f7;
+}
+
+#vis {
+  height: 50vh;
+  width: 50vw;
+}
+
+.node {
+  fill: green;
+  fill-opacity: 0.4;
+  stroke: green;
+  stroke-opacity: 0.5;
+}
